@@ -1,0 +1,38 @@
+<?php
+
+class Mkeuangan extends Model{
+
+    public function __construct(){
+        $this->setTable('transaksi');
+    }
+
+    public function viewKeuangan($id){
+        $query = "select * from " . $this->getTable() . " where ID_PENGGUNA='$id'";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return $mysqli_query;
+        }else{
+            return false;
+        }
+    }
+
+    public function viewKategori($id){
+        $query = "select * from kategori where ID_PENGGUNA='$id'";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return $mysqli_query;
+        }else{
+            return false;
+        }
+    }
+
+    public function insert($kategori,$keluarMasuk,$nominal,$keterangan,$pengguna,$waktu){
+        $query = "insert into " . $this->getTable() . " values(null, $kategori , $pengguna, $keluarMasuk, '$nominal', '$keterangan', '$waktu')";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
