@@ -8,24 +8,17 @@
         </ul>
         <ul class="collection with-header">
             <li class="collection-header"><h4>Kategori</h4></li>
-            <li class="collection-item">
-                <p class="row">
-                    <span class="title"><b>Kategori :</b> Makan</span>
-                    <span class="title right"><b>Nominal :</b> Rp.200.000,-</span>
-                </p>
-            </li>
-            <li class="collection-item">
-                <p class="row">
-                    <span class="title"><b>Kategori :</b> Makan</span>
-                    <span class="title right"><b>Nominal :</b> Rp.200.000,-</span>
-                </p>
-            </li>
-            <li class="collection-item">
-                <p class="row">
-                    <span class="title"><b>Kategori :</b> Makan</span>
-                    <span class="title right"><b>Nominal :</b> Rp.200.000,-</span>
-                </p>
-            </li>
+            <?php
+                for($i = 0; $i< count($kategori); $i++){ ?>
+                    <li class="collection-item">
+                        <p class="row">
+                            <span class="title"><b>Kategori :</b> <?= $kategori[$i] ?></span>
+                            <span class="title right right-align">Nominal Keluar : <?= $keluar[$i] ?> <br> Nominal Masuk : <?= $masuk[$i] ?> <br> <b>Total</b> : <?= $total[$i] ?></span>
+                        </p>
+                    </li>
+                <?php
+                }
+            ?>
         </ul>    
     </div>
     <div class="fixed-action-btn">

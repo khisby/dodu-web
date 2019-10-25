@@ -31,7 +31,7 @@ class Keuangan extends Controller{
 		$pengguna = Session::getUser()['id'];
 		$waktu = date("Y/m/d H:i:s");
 
-		$keluarMasuk == 1 ? $keluarMasuk = 1 : $keluarMasuk = 0;
+		$keluarMasuk == "M" ? $keluarMasuk = 1 : $keluarMasuk = 0;
 		
 		if($this->getModel()->insert($kategori,$keluarMasuk,$nominal,$keterangan,$pengguna,$waktu)){
 			Session::setFlash("Berhasil menambahkan transaksi");
