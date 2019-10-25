@@ -62,38 +62,65 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             $('select').not('.disabled').formSelect();
             $('.collapsible').collapsible();
             $('.tooltipped').tooltip();
-            function renderChart(data) {
-                var ctx = document.getElementById("myChart").getContext('2d');
-                var myPieChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: data,
-                    options: {
-                        title: {
-                            display: true,
-                            text: "Colors election"
-                        }
-                    }
-                });
-            }
-            data = {
-                datasets: [{
-                    data: [10, 20, 30],
-                    borderColor: ['rgba(75, 192, 192, 1)', 'rgba(192, 0, 0, 1)', 'rgba(192, 192, 192, 1)'],
-                    backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(192, 0, 0, 0.2)', 'rgba(192, 0, 192, 0.2)']
-                }],
 
-                labels: [
-                    'Red',
-                    'Yellow',
-                    'Blue'
-                ],
-            };
-            renderChart(data);
-         });
-    </script>
+            <?php
+                if($view == 'laporan'){?>
+                    function renderChart(data) {
+                        var ctx = document.getElementById("myChart").getContext('2d');
+                        var myPieChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: data,
+                            options: {
+                                title: {
+                                    display: true,
+                                    text: "Laporan bulan ini (Keluar & Masuk)"
+                                }
+                            }
+                        });
+                    }
+                    function getRandomColor() {
+                        // var letters = '0123456789ABCDEF'.split('');
+                        var letters = 'B123456789ABCDEF'.split('');
+                        var color = '#';
+                        for (var i = 0; i < 6; i++ ) {
+                            color += letters[Math.floor(Math.random() * 16)];
+                        }
+                        return color;
+                    }
+
+                    function allRandomColor(border){
+                        var size = <?= count($laporan); ?> 
+                        var color = [];
+                        for(var i = 0; i <= size; i++){
+                            if(border){
+                                color.push("#ffffff");
+                            }else{
+                                color.push(getRandomColor());
+                            }   
+                        }
+                        return color;
+                    }
+                    console.log(allRandomColor(true));
+
+
+                    data = {
+                        datasets: [{
+                            data: <?php echo json_encode($angka); ?>,
+                            borderColor: allRandomColor(true),
+                            backgroundColor: allRandomColor()
+                        }],
+
+                        labels: <?php echo json_encode($kategori); ?>,
+                    };
+                    renderChart(data);     
+                <?php
+                }
+            ?>
+        });
+    </script> 
 </body>
 </html>
