@@ -7,7 +7,7 @@ class Mkeuangan extends Model{
     }
 
     public function viewKeuangan($id){
-        $query = "select * from " . $this->getTable() . " where ID_PENGGUNA='$id'";
+        $query = "select * from " . $this->getTable() . " JOIN kategori on kategori.ID_KATEGORI = transaksi.ID_KATEGORI where transaksi.ID_PENGGUNA='$id'";
         $mysqli_query  = mysqli_query($this->getDb(), $query);
         if($mysqli_query){
             return $mysqli_query;

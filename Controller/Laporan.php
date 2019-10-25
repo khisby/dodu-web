@@ -52,4 +52,9 @@ class Laporan extends Controller{
 		$this->view('laporan',['username' => $this->username, 'laporan' => $laporan, 'kategori'=>$kategori, 'angka' => $angka, 'keluar' => $keluar, 'masuk' => $masuk, 'total' => $total]);
 	}
 
+	public function toUang($uang){
+		$uang = $uang == 0 ? '-' : "Rp. " . number_format($uang,0,',','.') . ",-";
+		return $uang;
+	}
+
 }

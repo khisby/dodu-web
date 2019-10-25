@@ -5,12 +5,12 @@
                 while($data = $this->fetch($keuangan)){?>
                     <li class="collection-item">
                         <p class="row">
-                            <span class="title"><b>Kategori :</b> <?= $data['ID_KATEGORI'] ?></span>
-                            <span class="title right"><b>Jenis Transaksi :</b> <?= $data['JENIS_TRANSAKSI'] ?></span>
+                            <span class="title"><b>Kategori :</b> <?= $data['NAMA_KATEGORI'] ?></span>
+                            <span class="title right"><b>Jenis Transaksi :</b> <?= $data['JENIS_TRANSAKSI'] == 0 ? 'Keluar' : 'Masuk' ?></span>
                         </p>
                         <p class="row">
-                            <span class="title"><b>Nominal :</b> Rp.<?= $data['NOMINAL_TRANSAKSI'] ?>,-</span>
-                            <span class="title right"><b>Waktu :</b> <?= $data['WAKTU_TRANSAKSI'] ?></span>
+                            <span class="title"><b>Nominal :</b> <?= $this->toUang($data['NOMINAL_TRANSAKSI']) ?></span>
+                            <span class="title right"><b>Waktu :</b> <?= $this->toTanggal($data['WAKTU_TRANSAKSI']) ?></span>
                         </p>
                         <p>
                             <?= $data['KETERANGAN_TRANSAKSI'] ?>

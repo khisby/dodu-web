@@ -13,7 +13,7 @@
                     <li class="collection-item">
                         <p class="row">
                             <span class="title"><b>Kategori :</b> <?= $kategori[$i] ?></span>
-                            <span class="title right right-align">Nominal Keluar : <?= $keluar[$i] ?> <br> Nominal Masuk : <?= $masuk[$i] ?> <br> <b>Total</b> : <?= $total[$i] ?></span>
+                            <span class="title right right-align">Nominal Keluar : <?= $this->toUang($keluar[$i]) ?> <br> Nominal Masuk : <?= $this->toUang($masuk[$i]) ?> <br> <b>Total</b> : <?= $this->toUang($total[$i]) ?></span>
                         </p>
                     </li>
                 <?php

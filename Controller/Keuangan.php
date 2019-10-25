@@ -41,4 +41,14 @@ class Keuangan extends Controller{
 			header('Location: ' . $this->baseUrl('keuangan'));
 		}
 	}
+
+	public function toUang($uang){
+		$uang = "Rp. " . number_format($uang,0,',','.') . ",-";
+		return $uang;
+	}
+
+	public function toTanggal($tanggal){
+		$tanggal = date('d F Y', strtotime("2019-10-24 18:30:00.000000"));
+		return $tanggal;
+	}
 }
