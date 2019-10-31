@@ -15,4 +15,34 @@ class Mkategori extends Model{
             return false;
         }
     }
+
+    public function viewKategori($id){
+        $query = "select * from kategori where ID_PENGGUNA='$id'";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return $mysqli_query;
+        }else{
+            return false;
+        }
+    }
+
+    public function kategori($id){
+        $query = "select * from kategori where ID_KATEGORI='$id'";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return $mysqli_query;
+        }else{
+            return false;
+        }
+    }
+
+    public function update($id, $kategori){
+        $query = "update " . $this->getTable() . " set NAMA_KATEGORI = '$kategori' where ID_KATEGORI=$id";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

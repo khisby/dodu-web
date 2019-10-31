@@ -7,7 +7,7 @@ class Mkeuangan extends Model{
     }
 
     public function viewKeuangan($id){
-        $query = "select * from " . $this->getTable() . " JOIN kategori on kategori.ID_KATEGORI = transaksi.ID_KATEGORI where transaksi.ID_PENGGUNA='$id'";
+        $query = "select * from " . $this->getTable() . " JOIN kategori on kategori.ID_KATEGORI = transaksi.ID_KATEGORI where transaksi.ID_PENGGUNA='$id' order by transaksi.WAKTU_TRANSAKSI DESC";
         $mysqli_query  = mysqli_query($this->getDb(), $query);
         if($mysqli_query){
             return $mysqli_query;
@@ -28,6 +28,16 @@ class Mkeuangan extends Model{
 
     public function insert($kategori,$keluarMasuk,$nominal,$keterangan,$pengguna,$waktu){
         $query = "insert into " . $this->getTable() . " values(null, $kategori , $pengguna, $keluarMasuk, '$nominal', '$keterangan', '$waktu')";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function deleteTransaksi($id){
+        $query = "DELETE FROM " . $this->getTable() . " where ID_TRANSAKSI = $id";
         $mysqli_query  = mysqli_query($this->getDb(), $query);
         if($mysqli_query){
             return true;

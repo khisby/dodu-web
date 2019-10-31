@@ -14,7 +14,8 @@ class Kategori extends Controller{
 	}
 	
 	public function index(){
-		$this->view('tambah-kategori',['username' => $this->username]);
+		$data = $this->getModel()->viewKategori(Session::getUser()['id']);
+		$this->view('tambah-kategori',['username' => $this->username, 'kategori' => $data]);
 	}
 
 	public function tambah(){
@@ -28,4 +29,26 @@ class Kategori extends Controller{
 			header('Location: ' . $_SERVER['HTTP_REFERER']);
 		}
 	 }
+
+	public function update($id){
+		$data = $this->getModel()->viewKategori(Session::getUser()['id']);
+		$kat = $this->getModel()->kategori($id);
+		$kat = $this->fetch($kat);
+
+		$this->view('tambah-kategori',['username' => $this->username, 'kategori' => $data, 'kat' => $kat]);
+	}
+
+	public function prosesUpdate(){
+		$id = $this->getPost('id');
+		$kategori = $this->getPost('kategori');
+
+		if($this->getModel()->update($id,$kategori)){
+			Session::setFlash("Berhasil mengubah kategori");
+			header('Location: ' . $this->baseUrl('kategori'));
+		}else{
+			Session::setFlash("Gagal mengubah kategori");
+			header('Location: ' . $this->baseUrl('kategori'));
+		}
+	 }
+
 }

@@ -36,6 +36,7 @@
                                         }
                                     ?>
                                     <li class="<?php echo funcActive('dashboard'); ?>"><a href="<?= $this->baseUrl('keuangan'); ?>">Keuangan</a></li>
+                                    <li class="<?php echo funcActive('jadwal'); ?>"><a href="<?= $this->baseUrl('jadwal'); ?>">Jadwal</a></li>
                                     <li class="<?php echo funcActive('laporan'); ?>"><a href="<?= $this->baseUrl('laporan'); ?>">Laporan</a></li>
                                     <li class="<?php echo funcActive('tentang'); ?>"><a href="<?= $this->baseUrl('tentang'); ?>">Tentang</a></li>
                                     <li class="<?php echo funcActive('logout'); ?>"><a href="<?= $this->baseUrl('logout'); ?>">Logout</a></li>
@@ -57,6 +58,7 @@
             ?>
         </div>
     </div>
+    <iframe src="<?= $this->baseUrl('jadwal/run'); ?>" style="border:none;"></iframe>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

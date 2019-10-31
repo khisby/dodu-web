@@ -42,13 +42,24 @@ class Keuangan extends Controller{
 		}
 	}
 
+	public function delete($id){
+		$kat = $this->getModel()->deleteTransaksi($id);
+		if($kat){
+			Session::setFlash("Berhasil menghapus transaksi");
+			header('Location: ' . $this->baseUrl('keuangan'));
+		}else{
+			Session::setFlash("Gagal menghapus transaksi");
+			header('Location: ' . $this->baseUrl('keuangan'));
+		}
+	}
+
 	public function toUang($uang){
 		$uang = "Rp. " . number_format($uang,0,',','.') . ",-";
 		return $uang;
 	}
 
 	public function toTanggal($tanggal){
-		$tanggal = date('d F Y', strtotime("2019-10-24 18:30:00.000000"));
+		$tanggal = date('d F Y', strtotime($tanggal));
 		return $tanggal;
 	}
 }

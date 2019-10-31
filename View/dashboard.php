@@ -15,6 +15,9 @@
                         <p>
                             <?= $data['KETERANGAN_TRANSAKSI'] ?>
                         </p>
+                        <p class="row">
+                            <a class="waves-effect waves-light red btn" href="<?= $this->baseUrl('keuangan/delete/' . $data['ID_TRANSAKSI']); ?>">Delete</a>
+                        </p>
                     </li>    
                 <?php
                 }
