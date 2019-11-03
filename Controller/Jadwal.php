@@ -43,21 +43,19 @@ class Jadwal extends Controller{
 		$tanggal = date("d");
 		$jadwal = $this->getModel()->viewJadwalAll();
 		$transaksi = $this->getModel()->viewTransaksiBulanIni($bulan);
-
 		while($jat = $this->fetch($jadwal)){
-			$sudahAda = false;
+			$sudahAda = true;
+			
 			if($jat['WAKTU_JADWAL'] == $tanggal){
 				while($tran = $this->fetch($transaksi)){
 					$waktu = $tran['WAKTU_TRANSAKSI'];
 					$tgl =  $tran['WAKTU_TRANSAKSI'][8] . $tran['WAKTU_TRANSAKSI'][9];
-					
-					if($tgl == $tanggal){
-						if($jat['ID_KATEGORI'] == $tran['ID_KATEGORI'] && $jat['ID_PENGGUNA'] == $tran['ID_PENGGUNA'] && $jat['JENIS_TRANSAKSI'] == $tran['JENIS_TRANSAKSI'] && $jat['NOMINAL_TRANSAKSI'] == $tran['NOMINAL_TRANSAKSI'] && $jat['KETERANGAN_TRANSAKSI'] == $tran['KETERANGAN_TRANSAKSI']){
-							$sudahAda = true;
-							break;
-						}else{
-							$sudahAda = false;
-						}
+
+					if($jat['ID_KATEGORI'] == $tran['ID_KATEGORI'] && $jat['ID_PENGGUNA'] == $tran['ID_PENGGUNA'] && $jat['JENIS_TRANSAKSI'] == $tran['JENIS_TRANSAKSI'] && $jat['NOMINAL_TRANSAKSI'] == $tran['NOMINAL_TRANSAKSI'] && $jat['KETERANGAN_TRANSAKSI'] == $tran['KETERANGAN_TRANSAKSI'] && $tgl == $tanggal){
+						$sudahAda = true;
+						break;
+					}else{
+						$sudahAda = false;
 					}
 				}
 			}
