@@ -19,7 +19,7 @@
                             <div class="container"> 
                                 <span class="left"> Login sebagai : <b><?= $username ?></b></span>
                             </div>
-                            <a href="<?= $this->baseUrl('keuangan'); ?>" class="brand-logo center">Dodu</a>
+                            <a href="<?= $this->baseUrl('keuangan/index/1') ; ?>" class="brand-logo center">Dodu</a>
                             <div class="container">
                                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                                     <?php
@@ -35,7 +35,7 @@
                                             return $class;
                                         }
                                     ?>
-                                    <li class="<?php echo funcActive('dashboard'); ?>"><a href="<?= $this->baseUrl('keuangan'); ?>">Keuangan</a></li>
+                                    <li class="<?php echo funcActive('dashboard'); ?>"><a href="<?= $this->baseUrl('keuangan/index/1'); ?>">Keuangan</a></li>
                                     <li class="<?php echo funcActive('jadwal'); ?>"><a href="<?= $this->baseUrl('jadwal'); ?>">Jadwal</a></li>
                                     <li class="<?php echo funcActive('laporan'); ?>"><a href="<?= $this->baseUrl('laporan'); ?>">Laporan</a></li>
                                     <li class="<?php echo funcActive('tentang'); ?>"><a href="<?= $this->baseUrl('tentang'); ?>">Tentang</a></li>
@@ -58,7 +58,7 @@
             ?>
         </div>
     </div>
-    <iframe src="<?= $this->baseUrl('jadwal/run'); ?>" style="border:none;"></iframe>
+    <iframe src="<?= $this->baseUrl('jadwal/run'); ?>" style="display:none;"></iframe>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

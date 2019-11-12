@@ -22,7 +22,16 @@
                 <?php
                 }
             ?>
-        </ul>  
+        </ul> 
+        <div class="row center-align">
+                <?php
+                    for($i=1; $i<=$jumlah; $i++){
+                        ?>
+                            <a class="waves-effect waves-light blue text-black btn btn-active" href="<?= $this->baseUrl('keuangan/index/' . $i); ?>"><?= $i ?></a>
+                        <?php
+                    }
+                ?>
+        </div> 
     </div>
     <div class="fixed-action-btn">
         <a class="btn-floating btn-large waves-effect waves-light green z-depth-3 pulse tooltipped" href="<?= $this->baseUrl('keuangan/tambah'); ?>" data-position="left" data-tooltip="Tekan tombol untuk menambahkan transaksi">

@@ -2,7 +2,7 @@
 
 
 class Keuangan extends Controller{
-	
+
 	private $username;
 	public function __construct(){
 		if(Session::getUser() == NULL){
@@ -13,10 +13,13 @@ class Keuangan extends Controller{
 		$this->username = Session::getUser()['username'];
 	}
 	
-	public function index(){
-		$keuangan = $this->getModel()->viewKeuangan(Session::getUser()['id']);
-		$this->view('dashboard',['username'=>$this->username,'keuangan'=>$keuangan]);
+	public function index($page){
+		$keuangan = $this->getModel()->viewKeuangan(Session::getUser()['id'], $page);
+		$jumlah = $this->getModel()->jumlahViewKeuangan(Session::getUser()['id']);
+		$jumlah = ceil($this->fetch($jumlah)[0]/10);
+		$this->view('dashboard',['username'=>$this->username,'keuangan'=>$keuangan, 'jumlah'=>$jumlah]);
 	}
+
 
 	public function tambah(){
 		$kat = $this->getModel()->viewKategori(Session::getUser()['id']);
@@ -35,10 +38,10 @@ class Keuangan extends Controller{
 		
 		if($this->getModel()->insert($kategori,$keluarMasuk,$nominal,$keterangan,$pengguna,$waktu)){
 			Session::setFlash("Berhasil menambahkan transaksi");
-			header('Location: ' . $this->baseUrl('keuangan'));
+			header('Location: ' . $this->baseUrl('keuangan/index/1'));
 		}else{
 			Session::setFlash("Gagal menambahkan transaksi");
-			header('Location: ' . $this->baseUrl('keuangan'));
+			header('Location: ' . $this->baseUrl('keuangan/index/1'));
 		}
 	}
 
@@ -46,10 +49,10 @@ class Keuangan extends Controller{
 		$kat = $this->getModel()->deleteTransaksi($id);
 		if($kat){
 			Session::setFlash("Berhasil menghapus transaksi");
-			header('Location: ' . $this->baseUrl('keuangan'));
+			header('Location: ' . $this->baseUrl('keuangan/index/1'));
 		}else{
 			Session::setFlash("Gagal menghapus transaksi");
-			header('Location: ' . $this->baseUrl('keuangan'));
+			header('Location: ' . $this->baseUrl('keuangan/index/1'));
 		}
 	}
 

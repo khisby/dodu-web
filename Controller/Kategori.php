@@ -6,7 +6,7 @@ class Kategori extends Controller{
 	public function __construct(){
 		if(Session::getUser() == NULL){
 			Session::setFlash('Anda harus login terlebih dahulu');
-			header("location:" . $this->baseUrl(''));
+			header("location:" . $this->baseUrl(''));c
 		}
 
 		$this->setModel('mkategori');

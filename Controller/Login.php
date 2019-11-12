@@ -19,7 +19,7 @@ class Login extends Controller{
 			$user = $this->getModel()->find($surelPengguna);
 			if($user[3] == $sandiPengguna){
 				Session::setUser($user[0],$user[1],$user[2]);
-				header('Location: ' . $this->baseUrl('keuangan'));
+				header('Location: ' . $this->baseUrl('keuangan/index/1'));
 			}else{
 				Session::setFlash("Gagal Login. surel atau sandi salah");
 				header('Location: ' . $_SERVER['HTTP_REFERER']);
