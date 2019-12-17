@@ -1,3 +1,7 @@
+<div class="container-loader"> 
+    <div class="loader"></div>
+    <p>Mohon tunggu masih memproses.</p>
+</div>
 <main>
     <center>
         <div class="section"></div>
@@ -9,8 +13,8 @@
 
         <div class="container">
             <div class="z-depth-1 grey lighten-4 row" style="width: 40%;padding: 32px 48px 32px 48px; border: 1px solid #EEE;">
-                <?= Session::getFlash() ?>
-                <form class="col s12" method="post" action="<?= $this->baseUrl('login/login'); ?>">
+                <p id="pesanFlash"><?= Session::getFlash() ?></p>
+                <form class="col s12" method="post" id="formLogin" action="<?= $this->baseUrl('login/login'); ?>">
 
                     <div class='row'>
                         <div class='input-field col s12'>
@@ -31,7 +35,7 @@
 
                     <center>
                         <div class='row'>
-                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                            <button type='submit' name='btn_login' id="btnLogin" class='col s12 btn btn-large waves-effect indigo' onClick="return false;">Login</button>
                         </div>
                     </center>
                 </form>

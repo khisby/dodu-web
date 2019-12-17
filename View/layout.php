@@ -7,6 +7,7 @@
     <title>Dodu - Dompet Dhuwit</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="assets/custom.css">
 </head>
 <body>
     <div class="">
@@ -122,6 +123,37 @@
                 <?php
                 }
             ?>
+
+
+            $("#btnLogin").click(function(){
+                var surel = $('#email').val();
+                var sandi = $('#password').val();
+
+                $.ajax({
+                    url : 'http://localhost/dodu/api/login/login',
+                    data: JSON.stringify({
+                        "surelPengguna" : surel,
+                        "sandiPengguna" : sandi
+                    }),
+                    type: 'POST',
+                    contentType: "application/json",
+                    dataType: 'json',
+                    beforeSend: function(){
+                        $('.container-loader').css('display','block');
+                    },
+                    success: function(pesan){
+                        setTimeout(function () {
+                            $('.container-loader').css('display','none');
+                            if(pesan['status'] == 200){
+                                $('#formLogin').submit();
+                            }else{  
+                                $('#pesanFlash').html(pesan['pesan']);
+                            }
+                        }, 1000);
+                    } 
+                });
+                
+            });
         });
     </script> 
 </body>
