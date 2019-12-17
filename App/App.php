@@ -11,48 +11,43 @@ class App{
 
 		if(count($_GET) > 0){
 			$url = explode('/',ltrim(rtrim($_SERVER['REQUEST_URI'], '/'),'/'));
-			// if(dev == "local"){
-			// 	// define('baseUrl', $_SERVER['SERVER_NAME'] . '/' . $url[0]. '/');
-			// 	define('baseUrl',  $url[0]. '/');
-			// }else{
-			// 	define('baseUrl',$_SERVER['SERVER_NAME'] . '/');
-			// }
 			$baseUrl = $url[0];
 			unset($url[0]);
-			
-			if(file_exists('Controller/' . $url[1] . '.php')){
-				$this->setController($url[1]);
+
+			if($url[1] == 'api'){
 				unset($url[1]);
+				if(!isset($url[2])){
+					echo "Ini adalah halaman RestFull API. silahkan lihat dokumentasi untuk menggunakannya.";
+					die();
+				}
+				if(file_exists('Controller/Api/' . $url[2]."API" . '.php')){
+					$this->setController($url[2],true);
+					unset($url[2]);
+				}
+			}else{
+				if(file_exists('Controller/' . $url[1] . '.php')){
+					$this->setController($url[1], false);
+					unset($url[1]);
+				}
 			}
 			
-			require_once($this->getController(true));
-			$this->controller = new $this->controller;
+		}
 
-			if(isset($url[2])){
-				if(method_exists($this->getController(true),$url[2])){
-					$this->method = strtolower($url[2]);
-					unset($url[2]);
+		require_once($this->getController(true));
+		$file = $this->getController(false);
+		$this->controller = new $this->controller;
+
+		if(substr($file, -3) == "API"){
+			if(isset($url[3])){
+				if(method_exists($this->getController(true),$url[3])){
+					$this->method = strtolower($url[3]);
+					unset($url[3]);
 				}else{
-					echo "method tidak ada. routing anda salah";
+					echo "method tidak ada. routing anda ";
 					die();
 				}
 			}
-
-			if(!empty($url)){
-				$this->data = array_values($url);
-			}
 		}else{
-			// if(dev == "local"){
-			// 	// define('baseUrl', $_SERVER['SERVER_NAME'] . '/' . $dir);
-			// 	define('baseUrl',  '/' . $dir);
-			// }else{
-			// 	// define('baseUrl', $_SERVER['SERVER_NAME'] . '/');
-			// 	define('baseUrl', $_SERVER['SERVER_NAME'] . '/');
-			// }
-
-			require_once($this->getController(true));
-			$this->controller = new $this->controller;
-
 			if(isset($url[2])){
 				if(method_exists($this->getController(true),$url[2])){
 					$this->method = strtolower($url[2]);
@@ -62,42 +57,23 @@ class App{
 					die();
 				}
 			}
+		}
 
-			if(!empty($url)){
-				$this->data = array_values($url);
-			}
+		
+		
+		if(!empty($url)){
+			$this->data = array_values($url);
 		}
 
 		call_user_func_array([$this->getController(false),$this->getMethod()], $this->getData());
-		// $this->autoloader();
 	}
 
-	// public function autoloader(){
-	// 	if(count($_GET) > 0){
-	// 		$url = explode('/',ltrim(rtrim($_SERVER['REQUEST_URI'], '/'),'/'));
-	// 		$baseUrl = $url[0];
-	// 		unset($url[0]);
-
-	// 		spl_autoload_register(function ($class) use ($url){
-	// 			$class = ucfirst(strtolower($class));
-	// 			if(file_exists('Controller/' . $url[1] . '.php')){
-	// 				require_once('Controller/' . $url[1] . '.php');
-	// 				$this->setController = $url[1];
-	// 				unset($url[1]);
-	// 			}else{
-	// 				echo "Controller tidak ada";
-	// 				die();
-	// 			}
-	// 		});
-	// 	}else{
-			
-	// 	} 
-		
-	// 	$this->controller = new $this->controller;
-	// }
-
-	public function setController($controller){
-		$this->controller = ucfirst(strtolower($controller));
+	public function setController($controller, $api){
+		if($api == true){
+			$this->controller = ucfirst(strtolower($controller))."API";
+		}else{
+			$this->controller = ucfirst(strtolower($controller));
+		}
 	}
 
 
@@ -106,11 +82,20 @@ class App{
 			return $this->controller;
 		}
 
-		if($withPhp){
-			return 'Controller/' . $this->controller . '.php';
+		if(substr($this->controller, -3) == "API"){
+			if($withPhp){
+				return 'Controller/Api/' . $this->controller . '.php';
+			}else{
+				return $this->controller;
+			}
 		}else{
-			return $this->controller;
+			if($withPhp){
+				return 'Controller/' . $this->controller . '.php';
+			}else{
+				return $this->controller;
+			}
 		}
+		
 
 	}
 
