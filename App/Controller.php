@@ -125,4 +125,14 @@ class Controller{
 
 		return $data[$param];
 	}
+
+	public function getLoginApiMiddleware(){
+		$modelPengguna = $this->createModel('mPengguna');
+		$pengguna = $modelPengguna->findPenggunaByToken($this->getParams("token"));
+		if(!$pengguna){
+			$this->toJson(401, "Token tidak valid", []);
+			die();
+		}
+		return $pengguna;
+	}
 }

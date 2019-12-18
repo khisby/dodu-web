@@ -4,6 +4,7 @@
 class LogoutAPI extends Controller{
 
 	public function __construct(){
+		$pengguna = $this->getLoginApiMiddleware();
 		$this->setModel('mpengguna');
 	}
 	
@@ -12,7 +13,7 @@ class LogoutAPI extends Controller{
 	}
 
 	public function logout(){
-		$this->apiValidation("post", ['token']);
+		$this->apiValidation("post", []);
 		$user = $this->getModel()->findPenggunaByToken($this->getParams('token'));
 		$this->getModel()->updateToken($user[0],"");
 		$this->toJson(200, "berhasil logout", []);

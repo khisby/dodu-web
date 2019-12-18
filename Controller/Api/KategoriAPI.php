@@ -6,12 +6,7 @@ class KategoriAPI extends Controller{
 	private $id;
 
 	public function __construct(){
-		$modelPengguna = $this->createModel('mPengguna');
-		$pengguna = $modelPengguna->findPenggunaByToken($this->getParams("token"));
-		if(!$pengguna){
-			$this->toJson(401, "Token tidak valid", []);
-			die();
-		}
+		$pengguna = $this->getLoginApiMiddleware();
 		$this->id = $pengguna[0];
 		$this->setModel('mkategori');
 	}
@@ -26,35 +21,48 @@ class KategoriAPI extends Controller{
 	}
 
 	public function tambah(){
-		$kategori = $this->getPost('kategori');
+		$this->apiValidation("post", ['kategori']);
+		$kategori = $this->getParams('kategori');
 
-		if($this->getModel()->insert($kategori,Session::getUser()['id'])){
-			Session::setFlash("Berhasil menambahkan kategori");
-			header('Location: ' . $this->baseUrl('keuangan/tambah'));
+		if($this->getModel()->insert($kategori,$this->id)){
+			$data = $this->fetchApi($this->getModel()->viewKategori($this->id));
+			$this->toJson(
+				200, 
+				"Berhasil menambah kategori", 
+				$data[sizeof($data)-1]
+			);
 		}else{
-			Session::setFlash("Gagal menambah kategori");
-			header('Location: ' . $_SERVER['HTTP_REFERER']);
+			$this->toJson(401, "Gagal menambah kategori", []);
 		}
 	 }
 
 	public function update($id){
-		$data = $this->getModel()->viewKategori(Session::getUser()['id']);
+		$this->apiValidation("get", []);
+		$data = $this->getModel()->viewKategori($this->id);
 		$kat = $this->getModel()->kategori($id);
-		$kat = $this->fetch($kat);
+		$kat = $this->fetchApi($kat);
 
-		$this->view('tambah-kategori',['username' => $this->username, 'kategori' => $data, 'kat' => $kat]);
+		$this->toJson(
+			200, 
+			"Berhasil mengambil data kategori dengan id " . $id, 
+			$kat
+		);
 	}
 
 	public function prosesUpdate(){
-		$id = $this->getPost('id');
-		$kategori = $this->getPost('kategori');
+		$this->apiValidation("put", ['id','kategori']);
+		$id = $this->getParams('id');
+		$kategori = $this->getParams('kategori');
 
 		if($this->getModel()->update($id,$kategori)){
-			Session::setFlash("Berhasil mengubah kategori");
-			header('Location: ' . $this->baseUrl('kategori'));
+			$data = $this->fetchApi($this->getModel()->kategori($id));
+			$this->toJson(
+				200, 
+				"Berhasil mendapatkan list kategori", 
+				$data
+			);
 		}else{
-			Session::setFlash("Gagal mengubah kategori");
-			header('Location: ' . $this->baseUrl('kategori'));
+			$this->toJson(401, "Gagal mengupdate kategori", []);
 		}
 	 }
 

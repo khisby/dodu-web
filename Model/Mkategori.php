@@ -45,4 +45,8 @@ class Mkategori extends Model{
             return false;
         }
     }
+
+    public function getLastId(){
+        return mysqli_insert_id($this->getDb());
+    }
 }
