@@ -20,15 +20,12 @@ class RegistrasiAPI extends Controller{
 		
 		if($this->getModel()->insert($namaPengguna, $surelPengguna, $sandiPengguna)){
 			$user = $this->getModel()->find($surelPengguna);
-
+			
 			$this->toJson(
 				201, 
-				"Berhasil registrasi", 
+				"Berhasil registrasi. Silahkan Login", 
 				[
-					"ID_PENGGUNA" => $user[0],
-					"NAMA_PENGGUNA" => $user[1],
-					"SUREL_PENGGUNA" => $user[2],
-					"SANDI_PENGGUNA" => ""
+
 				]
 			);
 		}else{

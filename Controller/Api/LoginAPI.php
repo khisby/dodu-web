@@ -20,16 +20,21 @@ class LoginAPI extends Controller{
 		if($this->getModel()->find($surelPengguna) != false){
 			$user = $this->getModel()->find($surelPengguna);
 			if($user[3] == $sandiPengguna){
-				$this->toJson(
-					200, 
-					"Berhasil Login", 
-					[
-						"ID_PENGGUNA" => $user[0],
-						"NAMA_PENGGUNA" => $user[1],
-						"SUREL_PENGGUNA" => $user[2],
-						"SANDI_PENGGUNA" => ""
-					]
-				);
+				$token = "TOKEN-KHISOFT-DODU-".md5(uniqid($user[2], true));
+				if($this->getModel()->updateToken($user[0],$token)){
+					$this->toJson(
+						200, 
+						"Berhasil Login", 
+						[
+							// "ID_PENGGUNA" => $user[0],
+							"TOKEN" => $token,
+							"NAMA_PENGGUNA" => $user[1],
+							"SUREL_PENGGUNA" => $user[2],
+						]
+					);
+				}else{
+					$this->toJson(401, "Gagal generate token", []);
+				}
 			}else{
 				$this->toJson(401, "Username atau password salah", []);
 			}

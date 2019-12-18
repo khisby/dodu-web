@@ -37,12 +37,31 @@ class Controller{
 		}
 	}
 
+	public function createModel($model){
+		$model = ucfirst(strtolower($model));
+		if(file_exists('Model/' . $model . '.php')){
+			require_once('Model/' . $model . '.php');
+			$modelNew = new $model;
+			return $modelNew;
+		}else{
+			return false;
+		}
+	}
+
 	public function getModel(){
 		return $this->model;
 	}
 
 	public function fetch($data){
-		return mysqli_fetch_array($data);
+		return mysqli_fetch_assoc($data);
+	}
+
+	public function fetchApi($data){
+		$arr = [];
+		while($d = mysqli_fetch_assoc($data)){
+			array_push($arr, $d);
+		}
+		return $arr;
 	}
 
 
