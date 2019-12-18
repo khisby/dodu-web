@@ -48,12 +48,19 @@ class Mkeuangan extends Model{
     }
 
     public function deleteTransaksi($id){
-        $query = "DELETE FROM " . $this->getTable() . " where ID_TRANSAKSI = $id";
+        $query = "select * from " . $this->getTable() . " where transaksi.ID_TRANSAKSI='$id'";
         $mysqli_query  = mysqli_query($this->getDb(), $query);
-        if($mysqli_query){
-            return true;
+        if(mysqli_affected_rows($this->getDb()) != 0){
+            $query = "DELETE FROM " . $this->getTable() . " where ID_TRANSAKSI = $id";
+            $mysqli_query  = mysqli_query($this->getDb(), $query);
+            if($mysqli_query){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }
     }
+
 }

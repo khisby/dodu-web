@@ -16,7 +16,7 @@ class Keuangan extends Controller{
 	public function index($page){
 		$keuangan = $this->getModel()->viewKeuangan(Session::getUser()['id'], $page);
 		$jumlah = $this->getModel()->jumlahViewKeuangan(Session::getUser()['id']);
-		$jumlah = ceil($this->fetch($jumlah)[0]/10);
+		$jumlah = ceil($this->fetch($jumlah)["count(ID_TRANSAKSI)"]/10);
 		$this->view('dashboard',['username'=>$this->username,'keuangan'=>$keuangan, 'jumlah'=>$jumlah]);
 	}
 
