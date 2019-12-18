@@ -9,7 +9,7 @@ class LogoutAPI extends Controller{
 	}
 	
 	public function index(){
-		$this->toJson(200, "ini halaman login", []);
+		$this->toJson(200, "ini halaman logout", []);
 	}
 
 	public function logout(){

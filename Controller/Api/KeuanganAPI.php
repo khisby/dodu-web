@@ -10,7 +10,6 @@ class KeuanganAPI extends Controller{
 		$pengguna = $this->getLoginApiMiddleware();
 		$this->id = $pengguna[0];
 		$this->setModel('mkeuangan');
-		$this->username = Session::getUser()['username'];
 	}
 	
 	public function index($page){

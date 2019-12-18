@@ -1,22 +1,20 @@
 <?php
 
 
-class Laporan extends Controller{
+class LaporanAPI extends Controller{
 	
 	private $username;
+	private $id;
 
 	public function __construct(){
-		if(Session::getUser() == NULL){
-			Session::setFlash('Anda harus login terlebih dahulu');
-			header("location:" . $this->baseUrl(''));
-		}
+		$pengguna = $this->getLoginApiMiddleware();
+		$this->id = $pengguna[0];
 		$this->setModel('mlaporan');
-		$this->username = Session::getUser()['username'];
 	}
 	
 	public function index(){
 		$bulan = date('m');
-		$laporan = $this->getModel()->view(Session::getUser()['id'],10);
+		$laporan = $this->getModel()->view($this->id,10);
 		$kategori = [];
 		$angka = [];
 		$masuk = [];
@@ -49,8 +47,23 @@ class Laporan extends Controller{
 				$total[$index] = $masuk[$index] - $keluar[$index];
 			}
 		}
+		// $laporan = $this->fetchApi($laporan);
+		// var_dump($this->fetchApi($laporan));
+		// die();
+		$data = [
+			// 'laporan' => $laporan, 
+			'kategori'=>$kategori, 
+			'angka' => $angka, 
+			'keluar' => $keluar, 
+			'masuk' => $masuk, 
+			'total' => $total
+		];
 		
-		$this->view('laporan',['username' => $this->username, 'laporan' => $laporan, 'kategori'=>$kategori, 'angka' => $angka, 'keluar' => $keluar, 'masuk' => $masuk, 'total' => $total]);
+		$this->toJson(
+			200, 
+			"Berhasil menambah kategori", 
+			$data
+		);
 	}
 
 	public function toUang($uang){
