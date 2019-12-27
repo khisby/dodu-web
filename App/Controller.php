@@ -104,11 +104,20 @@ class Controller{
 	   	}
 
 		$data = json_decode(file_get_contents("php://input"),true);
+		$cek = array();
 		foreach($parameter as $p){
 			if(!isset($data[$p])){
-				$this->toJson(403, 'Parameter ' . $p . ' harus ada', []);
+				array_push($cek, 'Parameter ' . $p . ' harus ada');
+			}else if(empty($data[$p])){
+				array_push($cek, 'Parameter ' . $p . ' tidak boleh kosong');
 			}
 		}
+
+		if($cek){
+			$this->toJson(403, $cek, []);
+			die();
+		}
+		
 
 
 		// $data = ['surelPengguna' => 'khisby@gmail.com', 'sandiPengguna' => 'sandi'];
