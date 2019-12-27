@@ -17,7 +17,7 @@
                                     <option value="" disabled selected>Pilih salah satu...</option>
                                     <?php
                                         while($data = $this->fetch($kategori)){?>
-                                            <option value="<?= $data[0]; ?>"><?= $data[2]; ?></option>    
+                                            <option value="<?= $data["ID_KATEGORI"]; ?>"><?= $data["NAMA_KATEGORI"]; ?></option>    
                                         <?php
                                         }
                                     ?>
