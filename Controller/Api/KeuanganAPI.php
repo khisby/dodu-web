@@ -12,18 +12,16 @@ class KeuanganAPI extends Controller{
 		$this->setModel('mkeuangan');
 	}
 	
-	public function index($page){
-		
-		$keuangan = $this->getModel()->viewKeuangan($this->id, $page);
+	public function index($page = 1){
+		$keuangan = $this->getModel()->viewKeuanganAll($this->id);
 		$keuangan = $this->fetchApi($keuangan);
-		$jumlah = $this->getModel()->jumlahViewKeuangan($this->id);
-		$jumlah = ceil($this->fetch($jumlah)["count(ID_TRANSAKSI)"]/10);
+		// $jumlah = $this->getModel()->jumlahViewKeuangan($this->id);
+		// $jumlah = ceil($this->fetch($jumlah)["count(ID_TRANSAKSI)"]/10);
 		$this->toJson(
 			200, 
 			"Berhasil mendapatkan list kategori", 
 			[
 				"kauangan" => $keuangan,
-				"jumlahPage" => $jumlah
 			]
 		);
 	}
