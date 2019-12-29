@@ -61,7 +61,7 @@ class LaporanAPI extends Controller{
 		
 		$this->toJson(
 			200, 
-			"Berhasil menambah kategori", 
+			"Berhasil mendapatkan laporan", 
 			$data
 		);
 	}
