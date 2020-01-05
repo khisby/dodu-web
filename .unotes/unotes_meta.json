@@ -1,0 +1,39 @@
+{
+  "name": "",
+  "isOrdered": true,
+  "folders": {
+    "App": {
+      "name": "App",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "Assets": {
+      "name": "Assets",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "Controller": {
+      "name": "Controller",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "Model": {
+      "name": "Model",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "View": {
+      "name": "View",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    }
+  },
+  "files": {
+    "README": 0
+  }
+}
