@@ -143,12 +143,13 @@
                     },
                     success: function(pesan){
                         setTimeout(function () {
-                            $('.container-loader').css('display','none');
                             if(pesan['status'] == 200){
                                 $('#formLogin').submit();
                             }else{  
                                 $('#pesanFlash').html(pesan['pesan']);
                             }
+                            
+                            $('.container-loader').css('display','none');
                         }, 1000);
                     } 
                 });
