@@ -45,7 +45,7 @@ class KeuanganAPI extends Controller{
 			$jumlah = ceil($this->fetch($jumlah)["count(ID_TRANSAKSI)"]/10);
 			$this->toJson(
 				200, 
-				"Berhasil mendapatkan list kategori", 
+				"Berhasil menambahkan Keuangan", 
 				[
 					"kauangan" => $keuangan[0],
 					"jumlahPage" => $jumlah
