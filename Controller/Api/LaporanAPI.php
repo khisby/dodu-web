@@ -14,7 +14,7 @@ class LaporanAPI extends Controller{
 	
 	public function index(){
 		$bulan = date('m');
-		$laporan = $this->getModel()->view($this->id,10);
+		$laporan = $this->getModel()->view($this->id,$bulan);
 		$kategori = [];
 		$angka = [];
 		$masuk = [];
