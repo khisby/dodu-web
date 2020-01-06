@@ -17,6 +17,7 @@ class Mpengguna extends Model{
     }
 
     public function insert($nama, $surel, $sandi){
+        $sandi = md5($sandi);
         $query = "insert into " . $this->getTable() . " values(null, '$nama', '$surel', '$sandi', '')";
         $mysqli_query  = mysqli_query($this->getDb(), $query);
         if($mysqli_query){

@@ -19,7 +19,7 @@ class LoginAPI extends Controller{
 
 		if($this->getModel()->find($surelPengguna) != false){
 			$user = $this->getModel()->find($surelPengguna);
-			if($user[3] == $sandiPengguna){
+			if($user[3] == md5($sandiPengguna)){
 				$token = "TOKEN-KHISOFT-DODU-".md5(uniqid($user[2], true));
 				if($this->getModel()->updateToken($user[0],$token)){
 					$this->toJson(

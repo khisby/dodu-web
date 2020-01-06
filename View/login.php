@@ -13,7 +13,7 @@
 
         <div class="container">
             <div class="z-depth-1 grey lighten-4 row" style="width: 40%;padding: 32px 48px 32px 48px; border: 1px solid #EEE;">
-                <p id="pesanFlash"><?= Session::getFlash() ?></p>
+                <p id="pesanFlash" class="msg msg-error scale-transition"><?= Session::getFlash() ?></p>
                 <form class="col s12" method="post" id="formLogin" action="<?= $this->baseUrl('login/login'); ?>">
 
                     <div class='row'>

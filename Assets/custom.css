@@ -88,3 +88,22 @@ body {
      transform:rotate(360deg)
     }
    }
+
+   .msg {
+    width:100%;
+    border: 0px solid;
+    color: white;
+  }
+  .msg-error {
+    border-color: #d32f2f;
+    background-color: #ef5350;
+  }
+  .msg-alert {
+     border-color: #ef6c00;
+    background-color: #ff9800;
+  }
+  
+  .msg-info{
+    border-color: #0288d1;
+    background-color: #29b6f6;
+  }

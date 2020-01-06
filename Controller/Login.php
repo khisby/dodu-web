@@ -17,7 +17,7 @@ class Login extends Controller{
 
 		if($this->getModel()->find($surelPengguna) != false){
 			$user = $this->getModel()->find($surelPengguna);
-			if($user[3] == $sandiPengguna){
+			if($user[3] == md5($sandiPengguna)){
 				Session::setUser($user[0],$user[1],$user[2]);
 				header('Location: ' . $this->baseUrl('keuangan/index/1'));
 			}else{
