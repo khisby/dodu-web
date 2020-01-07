@@ -50,5 +50,16 @@ class Kategori extends Controller{
 			header('Location: ' . $this->baseUrl('kategori'));
 		}
 	 }
+	 
+	public function delete($id){
+		$modelTransaksi = $this->createModel('mKeuangan');
+		if($this->getModel()->delete($id) && $modelTransaksi->deleteTransaksiByIdKategori($id)){
+			Session::setFlash("Berhasil menghapus kategori");
+			header('Location: ' . $this->baseUrl('kategori'));
+		}else{
+			Session::setFlash("Gagal menghapus kategori");
+			header('Location: ' . $this->baseUrl('kategori'));
+		}
+	 }
 
 }

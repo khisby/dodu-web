@@ -46,6 +46,16 @@ class Mkategori extends Model{
         }
     }
 
+    public function delete($id){
+        $query = "delete from " . $this->getTable() . " where ID_KATEGORI=$id";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getLastId(){
         return mysqli_insert_id($this->getDb());
     }

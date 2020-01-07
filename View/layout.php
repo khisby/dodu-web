@@ -65,6 +65,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
     <script>
+        function confirmDeleteKategori(id){
+            var ask=confirm("Delete beserta semua transaksi? tindakan ini akan menghapus seluruh transaksi yang terkait kategori ini.");
+            if(ask){
+            window.location="kategori/delete/" + id;
+            }
+        }
+
         $(document).ready(function() {
             $('select').not('.disabled').formSelect();
             $('.collapsible').collapsible();

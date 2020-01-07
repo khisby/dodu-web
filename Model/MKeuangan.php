@@ -73,4 +73,14 @@ class Mkeuangan extends Model{
         }
     }
 
+    public function deleteTransaksiByIdKategori($id){
+        $query = "delete from " . $this->getTable() . " where ID_KATEGORI=$id";
+        $mysqli_query  = mysqli_query($this->getDb(), $query);
+        if($mysqli_query){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
