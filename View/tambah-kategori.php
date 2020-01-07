@@ -3,7 +3,13 @@
         <ul class="collection with-header">
             <li class="collection-header">
                 <h4>
-                    Tambah Kategori
+                    <?php
+                        if(!isset($kat)){
+                            echo "Tambah Kategori";
+                        }else{
+                            echo "Ubah Kategori";
+                        }
+                    ?>
                 </h4>
             </li>
             <li class="collection-item">
@@ -51,7 +57,7 @@
                         <thead>
                             <tr>
                                 <th>Kategori</th>
-                                <th>Aksi</th>
+                                <th style="width: 100px;">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,7 +66,8 @@
                                     ?>
                                     <tr>
                                         <td><?= $data['NAMA_KATEGORI'] ?></td>
-                                        <td><a class="waves-effect waves-light red btn" href="<?= $this->baseUrl('kategori/update/' . $data['ID_KATEGORI']); ?>">Update</a></td>
+                                        <td><a class="waves-effect waves-light grey btn" href="<?= $this->baseUrl('kategori/update/' . $data['ID_KATEGORI']); ?>">Update</a></td>
+                                        <td><a class="waves-effect waves-light red btn" onClick="confirmDeleteKategori(<?= $data['ID_KATEGORI']; ?>)" href="#">Delete</a></td>
                                     </tr>
                                     <?php
                                 }
