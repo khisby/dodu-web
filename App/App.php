@@ -20,12 +20,12 @@ class App{
 					echo "Ini adalah halaman RestFull API. silahkan lihat dokumentasi untuk menggunakannya.";
 					die();
 				}
-				if(file_exists('Controller/Api/' . $url[2]."API" . '.php')){
+				if(file_exists('Controller/Api/' . ucfirst(strtolower($url[2]))."API" . '.php')){
 					$this->setController($url[2],true);
 					unset($url[2]);
 				}
 			}else{
-				if(file_exists('Controller/' . $url[1] . '.php')){
+				if(file_exists('Controller/' . ucfirst(strtolower($url[1])) . '.php')){
 					$this->setController($url[1], false);
 					unset($url[1]);
 				}
@@ -43,7 +43,7 @@ class App{
 					$this->method = strtolower($url[3]);
 					unset($url[3]);
 				}else{
-					echo "method tidak ada. routing anda ";
+					echo "method tidak ada. routing anda salah ";
 					die();
 				}
 			}
@@ -53,7 +53,7 @@ class App{
 					$this->method = strtolower($url[2]);
 					unset($url[2]);
 				}else{
-					echo "method tidak ada. routing anda ";
+					echo "method tidak ada. routing anda salah ";
 					die();
 				}
 			}

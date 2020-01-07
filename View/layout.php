@@ -7,7 +7,7 @@
     <title>Dodu - Dompet Dhuwit</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel="stylesheet" href="assets/custom.css">
+    <link rel="stylesheet" href="Assets/custom.css">
 </head>
 <body>
     <div class="">
@@ -52,9 +52,9 @@
         <div class="row">
             <?php
                 if(isset($view) && !empty($view)){
-                    include('view/' . $view . '.php');
+                    include('View/' . $view . '.php');
                 }else{
-                    include('view/login.php');
+                    include('View/login.php');
                 }
             ?>
         </div>
@@ -136,15 +136,37 @@
                         "sandiPengguna" : sandi
                     }),
                     type: 'POST',
-                    contentType: "application/json",
+                    crossDomain: true,
                     dataType: 'json',
+                    contentType: "application/json",
                     beforeSend: function(){
                         $('.container-loader').css('display','block');
                     },
                     success: function(pesan){
                         setTimeout(function () {
                             if(pesan['status'] == 200){
-                                $('#formLogin').submit();
+                                $.ajax({
+                                    url : 'http://localhost/dodu/api/logout/logout',
+                                    data: JSON.stringify({
+                                        "token" : pesan['data'].TOKEN
+                                    }),
+                                    type: 'POST',
+                                    contentType: "application/json",
+                                    dataType: 'json',
+                                    beforeSend: function(){
+                                        $('.container-loader').css('display','block');
+                                    },
+                                    success: function(pesan){
+                                        setTimeout(function () {
+                                            if(pesan['status'] == 200){
+                                                $('#formLogin').submit();
+                                            }else{  
+                                                $('#pesanFlash').html(pesan['pesan']);
+                                            }
+                                            $('.container-loader').css('display','none');
+                                        }, 1000);
+                                    } 
+                                });
                             }else{  
                                 // M.toast({html: pesan['pesan']});
                                 $('#pesanFlash').html(pesan['pesan']);

@@ -98,6 +98,13 @@ class Controller{
 		// 	die();
 		// }
 
+        header( "Access-Control-Allow-Origin: *" );
+        header( "Access-Control-Allow-Credentials: true" );
+        header( "Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS" );
+        header( "Access-Control-Max-Age: 604800" );
+        header( "Access-Control-Request-Headers: x-requested-with" );
+        header( "Access-Control-Allow-Headers: x-requested-with, x-requested-by" );
+        
 		if ($_SERVER['REQUEST_METHOD'] != strtoupper($method)) {
 			echo "Request method tidak di izinkan!";
 			die();	
