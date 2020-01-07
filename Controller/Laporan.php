@@ -16,7 +16,7 @@ class Laporan extends Controller{
 	
 	public function index(){
 		$bulan = date('m');
-		$laporan = $this->getModel()->view(Session::getUser()['id'],10);
+		$laporan = $this->getModel()->view(Session::getUser()['id'],$bulan);
 		$kategori = [];
 		$angka = [];
 		$masuk = [];
