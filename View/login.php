@@ -39,6 +39,11 @@
                         </div>
                     </center>
                 </form>
+
+                <p style="color: grey;">atau</p>
+
+                <a href="<?= $google_client->createAuthUrl(); ?>"><img src="Assets/btn_login_with_google.png" alt="Login with Google" style="max-width: 200px;"></a>
+               
             </div>
         </div>
         <a href="<?= $this->baseUrl('registrasi'); ?>">Buat akun baru</a>

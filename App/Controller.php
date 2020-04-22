@@ -12,6 +12,10 @@ class Controller{
 		return '/' . host . '/' . $url;
 	}
 
+	public function baseUrlAbsolute($url){
+		return 'http://' . hostname . '/' . host . '/' . $url;
+	}
+
 	public function getPost($post){
 		if(isset($_POST[$post]) && !empty($_POST[$post])){
 			return $_POST[$post];

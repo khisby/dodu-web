@@ -31,6 +31,12 @@
       "isOrdered": true,
       "folders": {},
       "files": {}
+    },
+    "vendor": {
+      "name": "vendor",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
     }
   },
   "files": {

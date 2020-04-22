@@ -115,9 +115,4 @@ class App{
 		return $this->baseUrl;
 	}
 
-	// public function dd($var){
-	// 	var_dump($var);
-	// 	die();
-	// }
-
 }
